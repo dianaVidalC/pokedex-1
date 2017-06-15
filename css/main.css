@@ -58,3 +58,19 @@ header {
     margin: 16px 12px;
     text-align: center;
 }
+
+/*Modal*/
+
+.modal-pokemon {
+    width: 100%;
+    background-color: rgba(113, 113, 113, 0.51);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: none;
+}
+
+.modal-content {
+    width: 80%;
+    background-color: #bac7b6;
+}
