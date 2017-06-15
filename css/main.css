@@ -11,4 +11,24 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 100%;
+}
+.form-control div{
+    position: relative;
+}
+.form-control input{
+    border: none;
+    border-bottom: 1px solid #62676b;
+    height: 30px;
+    width: 80%;
+    padding-left: 42px;
+}
+
+.form-control a{
+    color: #62676b;
+    text-decoration: none;
+    font-size: 1.3rem;
+    position: absolute;
+    top :14%;
+    left : 5px;
 }
