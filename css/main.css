@@ -32,3 +32,29 @@ header {
     top :14%;
     left : 5px;
 }
+.grid-pokemon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.pokemon-container {
+    width: 215px;
+    height: 260px;
+    background: #bdbdbd;
+    margin: 14px 10px;
+    border-radius: 5px;
+}
+.base {
+    width: 100%;
+    height: 49px;
+    background: transparent url("../assets/icon/base.png") center top no-repeat;
+    display: flex;
+    justify-content: center;
+}
+.base .icon {
+    height: 18px;
+    width: 18px;
+    margin: 16px 12px;
+    text-align: center;
+}

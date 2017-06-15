@@ -3,12 +3,14 @@ const render = (root)=>{
     root.empty();
     const wrapper = $('<div class="wrapper"></div>');
     wrapper.append(Header());
-    wrapper.append(SearchPokemon());//_=>{render(root)}
+    wrapper.append(PokemonSearch());//_=>{render(root)}
+    //wrapper.append(PokemonDetails());
     root.append(wrapper);
 }
 
 const state = {
   pokemon :null,
+  urlPokemon:null,
   pokemonSelected :null
 };
 $(_=>{
@@ -18,4 +20,5 @@ $(_=>{
         const root = $('#root');
         render(root);
     });
+
 })
