@@ -1,8 +1,7 @@
 "use strict";
-function filterByPokemon(pokemon,query) {
-    pokemon.filter((e)=>{
-        //return e.pokemon_entries
-        console.log(e.pokemon_entries);
-
-    })
+function filterByPokemon(pokemons,query) {
+  var filter = pokemons.filter((pokemon)=>{
+    return pokemon.pokemon_species.name.indexOf(query)!=-1;
+  });
+  return filter;
 }
