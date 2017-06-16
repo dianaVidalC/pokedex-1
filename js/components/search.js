@@ -20,15 +20,21 @@ const pokemonItem = (pokemon,update) => {
     divPokemon.append(figurePokemon);
     divPokemon.append(namePokemon);
 
-    getJSON(pokemonUrl,(error, json)=>{
-        if (error){return alert(error.message);}
-        state.urlPokemon = json.flavor_text_entries[3];
-        console.log(state.urlPokemon);
-    });
+
 
     divPokemon.on('click', (e)=>{
         e.preventDefault();
+        $(_=>{
+            getJSON(pokemonUrl,(error, json)=>{
+                if (error){return alert(error.message);}
+                state.urlPokemon = json.flavor_text_entries[3];
+                console.log(state.urlPokemon);
+            });
+        });
 
+        $.getJSON(pokemonUrl,(response)=>{
+            console.log(response);
+        })
         //update();
     });
 
@@ -39,7 +45,7 @@ const reRender = (grid,inputValue)=>{
 
     const filteredPokemon = filterByPokemon(state.pokemon,inputValue);
     $.each(filteredPokemon,(index,pokemon)=>{
-       grid.append(pokemonItem('pokemon',_=>{reRender(grid,inputValue)}));
+       grid.append(pokemonItem(pokemon,_=>{reRender(grid,inputValue)}));
     });
 }
 const PokemonSearch = _=>{
