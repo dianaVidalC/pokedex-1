@@ -2,16 +2,23 @@
 const render = (root)=>{
     root.empty();
     const wrapper = $('<div class="wrapper"></div>');
-    wrapper.append(Header());
-    wrapper.append(PokemonSearch());//_=>{render(root)}
-    //wrapper.append(PokemonDetails());
+    //wrapper.append(Header());
+  //  wrapper.append(PokemonSearch());//_=>{render(root)}
+
+    if (state.pokemonSelected == null) {
+      wrapper.append(PokemonSearch());
+    }else {
+      //wrapper.append(StationDetails( _ => render(root)));
+      wrapper.append(PokemonDetails());
+    }
     root.append(wrapper);
 }
 
 const state = {
   pokemon :null,
-  urlPokemon:null,
-  pokemonSelected :null
+  pokemonDescription:null,
+  pokemonSelected :null,
+  pokemonComponent:null
 };
 $(_=>{
     getJSON('http://pokeapi.co/api/v2/pokedex/1/',(error, json)=>{
