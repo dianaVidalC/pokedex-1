@@ -61,10 +61,16 @@ const reRender = (grid,inputValue)=>{
 
 const renderModal=(modal)=>{
   modal.empty();
-  let nameType=[];
+  let nameType=[], damages=[];
   state.pokemonSelected.arrTypes.forEach((elem)=>{
     nameType.push(filterLanguage(elem.names)[0].name);
+    elem.damage_relations.half_damage_to.forEach((e)=>{
+      if(damages.indexOf(e.name)==-1){
+        damages.push(e.name);
+      }
+    });
   })
+  console.log(damages);
   const objPokemonDetails = {
      name: filterLanguage(state.pokemonSpecie.names)[0].name,
      description: filterLanguage(state.pokemonSpecie.flavor_text_entries)[0].flavor_text,
@@ -72,7 +78,8 @@ const renderModal=(modal)=>{
      abilities : state.pokemonSelected.abilities.map((e)=>e.ability.name),
      height:state.pokemonSelected.height,
      weight:state.pokemonSelected.weight,
-     type : nameType
+     type : nameType,
+     weakness:damages
   }
   modal.append(PokemonDetails(objPokemonDetails));
   modal.show();

@@ -1,5 +1,6 @@
 "use strict";
 const PokemonDetails = (pokemon)=>{
+  let ability = '',types = '', damages='';
     const divContainer = $('<div class="container flex-container"></div>');
     const modalContent = $('<div class="modal-content flex-container"></div>');
     const namePokemon = $(`<h2>${pokemon.name}</h2>`);
@@ -13,14 +14,12 @@ const PokemonDetails = (pokemon)=>{
     const weight = $(`<div><h5>Peso:</h5><p>${pokemon.weight}</p></div>`);
     const genero = $(`<div><h5>Sexo:</h5><p>s</p></div>`);
     const category = $(`<div><h5>Categoria:</h5><p>${pokemon.category}</p></div>`);
-    let ability = '';
     pokemon.abilities.forEach((e)=>{ability += `<p>${e}</p>`;});
     const divAbility = $(`<div><h5>Habilidad:</h5>${ability}</div>`);
-    let types = '';
     pokemon.type.forEach((e)=>{types += `<span>${e}</span>`; });
     const type = $(`<div class ="type"><h4>Tipo:</h4>${types}</div>`);
-    const weakness = $('<div class ="weakness"></div>');
-    const weaknessTitle = $('<h4>Debilidad:</h4>');
+    pokemon.weakness.forEach((e)=>{damages += `<span>${e}</span>`;});
+    const weakness = $(`<div class ="weakness"><h4>Debilidad:</h4>${damages}</div>`);
 
     modalContent.append(namePokemon);
     modalContent.append(closeModal);
@@ -32,7 +31,6 @@ const PokemonDetails = (pokemon)=>{
     features.append(divAbility);
     divDetails.append(features);
     divDetails.append(type);
-    weakness.append(weaknessTitle);
     divDetails.append(weakness);
     divData.append(divPokemon);
     divData.append(divDetails);
