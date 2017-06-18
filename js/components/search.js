@@ -1,12 +1,11 @@
 "use strict";
-const pokemonItem = (pokemon,update) => {
+const pokemonItem = (pokemon) => {
     const idPokemonImg =('000'+pokemon.entry_number).slice(-3);
     const urlPokemon = pokemon.pokemon_species.url;
-    const idPokemon = urlPokemon+urlPokemon.slice(-3);
+    const idPokemon = pokemon.entry_number+'/';
     const divPokemon = $('<div class="pokemonContainer"></div>');
     const figurePokemon = $('<figure class="pokemon-container"></figure>');
     const imgPokemon = $(`<img src="http://assets.pokemon.com/assets/cms2/img/pokedex/detail/${idPokemonImg}.png" alt="">`);
-    //const imgPokemon = $(`<img src="http://assets.pokemon.com/assets/cms2/img/pokedex/detail/001.png" alt="">`);
     const divBase = $ ('<div class="base"></div>');
     const pokeball = $('<img class="icon" src="assets/icon/pokeball_gray.png" alt="pokeball">');
     const heartIcon = $('<img class="icon" src="assets/icon/valentines-heart.png" alt="heart icon">');
@@ -21,33 +20,49 @@ const pokemonItem = (pokemon,update) => {
     divPokemon.append(figurePokemon);
     divPokemon.append(namePokemon);
 
-
-
     divPokemon.on('click', (e)=>{
-        e.preventDefault();
-        state.pokemonComponent=figurePokemon;
-        $.getJSON(urlPokemon,(jsonResponse)=>{
-            console.log(response);
-            state.pokemonDescription = jsonResponse.flavor_text_entries[3].flavor_text;
-        });
+        state.pokemonComponent=figurePokemon[0].outerHTML;
+          $.getJSON(urlPokemon,(jsonResponse)=>{
+              state.pokemonSpecie=jsonResponse;
+              $.getJSON('http://pokeapi.co/api/v2/pokemon/'+idPokemon,(json)=>{
+                state.pokemonSelected=json;
+                // const abilityUrl = state.pokemonSelected.abilities.forEach((elem)=>{
+                //   $.getJSON(elem.ability.url,(response)=>{
+                //
+                //   })
+                // });
+                const modalPokemon=$('#modal-pokemon');
+                renderModal(modalPokemon);
+              });
+          });
 
-        $.getJSON('http://pokeapi.co/api/v2/pokemon/'+idPokemon,(json)=>{
-          state.pokemonSelected=json;
-        });
-        //update();
     });
-
     return divPokemon;
 }
 const reRender = (grid,inputValue)=>{
     grid.empty();
-
     const filteredPokemon = filterByPokemon(state.pokemon,inputValue);
     $.each(filteredPokemon,(index,pokemon)=>{
-       grid.append(pokemonItem(pokemon,_=>{reRender(grid,inputValue)}));
+       grid.append(pokemonItem(pokemon));//_=>{reRender(grid,inputValue)}));
     });
 }
-const PokemonSearch = _=>{
+
+const renderModal=(modal)=>{
+  modal.empty();
+
+  const objPokemonDetails = {
+     name: filterLanguage(state.pokemonSpecie.names)[0].name,
+     description: filterLanguage(state.pokemonSpecie.flavor_text_entries)[0].flavor_text,
+     category : filterLanguage(state.pokemonSpecie.genera)[0].genus,
+     abilities : state.pokemonSelected.abilities.map((e)=>e.ability.name),
+     height:state.pokemonSelected.height,
+     weight:state.pokemonSelected.weight,
+  }
+  console.log(objPokemonDetails.abilities);
+  modal.append(PokemonDetails(objPokemonDetails));
+  modal.show();
+};
+const PokemonSearch = ()=>{
     const formSearch = $('<form class="form-control"></form>');
     const divSearch = $('<div></div>');
     const input = $('<input type="search">')
