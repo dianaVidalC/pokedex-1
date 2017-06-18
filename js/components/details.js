@@ -1,6 +1,5 @@
 "use strict";
 const PokemonDetails = (pokemon)=>{
-  console.log(pokemon.abilities.forEach((e)=>{e}));
     const divContainer = $('<div class="container flex-container"></div>');
     const modalContent = $('<div class="modal-content flex-container"></div>');
     const namePokemon = $(`<h2>${pokemon.name}</h2>`);
@@ -14,13 +13,12 @@ const PokemonDetails = (pokemon)=>{
     const weight = $(`<div><h5>Peso:</h5><p>${pokemon.weight}</p></div>`);
     const genero = $(`<div><h5>Sexo:</h5><p>s</p></div>`);
     const category = $(`<div><h5>Categoria:</h5><p>${pokemon.category}</p></div>`);
-    const ability = pokemon.abilities.forEach((e)=>{$(`<p>${e}</p>`)});
-    console.log(ability);
-    const divAbility = $(`<div><h5>Habilidad:</h5>${ability}</div>`)
-    const type = $('<div class ="type"></div>');
-    const typeTitle = $('<h4>Tipo:</h4>');
-    const type1 = $('<span>Bicho</span>');
-    const type2 = $('<span>Bicho</span>');
+    let ability = '';
+    pokemon.abilities.forEach((e)=>{ability += `<p>${e}</p>`;});
+    const divAbility = $(`<div><h5>Habilidad:</h5>${ability}</div>`);
+    let types = '';
+    pokemon.type.forEach((e)=>{types += `<span>${e}</span>`; });
+    const type = $(`<div class ="type"><h4>Tipo:</h4>${types}</div>`);
     const weakness = $('<div class ="weakness"></div>');
     const weaknessTitle = $('<h4>Debilidad:</h4>');
 
@@ -33,9 +31,6 @@ const PokemonDetails = (pokemon)=>{
     features.append(category);
     features.append(divAbility);
     divDetails.append(features);
-    type.append(typeTitle);
-    type.append(type1);
-    type.append(type2);
     divDetails.append(type);
     weakness.append(weaknessTitle);
     divDetails.append(weakness);
@@ -47,7 +42,5 @@ const PokemonDetails = (pokemon)=>{
     closeModal.on('click',(e)=>{
       $('.modal-pokemon').hide();
     });
-
-  //  update();
     return divContainer;
 }

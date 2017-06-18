@@ -22,6 +22,7 @@ const pokemonItem = (pokemon) => {
 
     divPokemon.on('click', (e)=>{
         state.pokemonComponent=figurePokemon[0].outerHTML;
+
           $.getJSON(urlPokemon,(jsonResponse)=>{
               state.pokemonSpecie=jsonResponse;
               $.getJSON('http://pokeapi.co/api/v2/pokemon/'+idPokemon,(json)=>{
@@ -31,6 +32,17 @@ const pokemonItem = (pokemon) => {
                 //
                 //   })
                 // });
+                state.pokemonSelected.arrTypes=[];
+                state.pokemonSelected.types.forEach((elem)=>{
+                  $.ajax({
+                    url: elem.type.url,
+                    dataType: 'json',
+                    async: false,
+                    success : function(data) {
+                      state.pokemonSelected.arrTypes.push(data);
+                    }
+                  });
+                });
                 const modalPokemon=$('#modal-pokemon');
                 renderModal(modalPokemon);
               });
@@ -43,13 +55,16 @@ const reRender = (grid,inputValue)=>{
     grid.empty();
     const filteredPokemon = filterByPokemon(state.pokemon,inputValue);
     $.each(filteredPokemon,(index,pokemon)=>{
-       grid.append(pokemonItem(pokemon));//_=>{reRender(grid,inputValue)}));
+       grid.append(pokemonItem(pokemon));
     });
 }
 
 const renderModal=(modal)=>{
   modal.empty();
-
+  let nameType=[];
+  state.pokemonSelected.arrTypes.forEach((elem)=>{
+    nameType.push(filterLanguage(elem.names)[0].name);
+  })
   const objPokemonDetails = {
      name: filterLanguage(state.pokemonSpecie.names)[0].name,
      description: filterLanguage(state.pokemonSpecie.flavor_text_entries)[0].flavor_text,
@@ -57,8 +72,8 @@ const renderModal=(modal)=>{
      abilities : state.pokemonSelected.abilities.map((e)=>e.ability.name),
      height:state.pokemonSelected.height,
      weight:state.pokemonSelected.weight,
+     type : nameType
   }
-  console.log(objPokemonDetails.abilities);
   modal.append(PokemonDetails(objPokemonDetails));
   modal.show();
 };
