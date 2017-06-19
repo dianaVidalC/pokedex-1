@@ -1,5 +1,5 @@
-# Pokedex
-Pokedex es una app que muestra una lista de 721 pokemones, con sus respectivo detalle por cada pokemon; mostrados en un modal.
+# Pokédex
+Pokédex es una app que muestra una lista de 721 pokemones, con sus respectivo detalle por cada pokemon; mostrados en un modal.
 Para el desarrollo de esta app, se utilizó la The Pokemon RESTful API, siguiendo su documentación en http://pokeapi.co/docsv2/
 
 La aplicacion se trabajó con el modelo de componentes de manera asincrona, los cuales son:
