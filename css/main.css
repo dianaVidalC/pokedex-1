@@ -1,8 +1,11 @@
 @import url('../css/colores.css');
+@font-face {
+  font-family:'Flexo-Regular';
+  src:url('../assets/font-flexo/Flexo-Regular.otf');
+}
 
 * {
-  font-family: 'Lato', sans-serif;
-  /*font-family: "Flexo-Regular",arial,sans-serif;*/
+  font-family: "Flexo-Regular",arial,sans-serif;
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
@@ -63,6 +66,10 @@ header {
 .pokemon-container {
   margin-top: 14px;
   text-align: center;
+}
+
+.pokemon-container .pokes{
+  font-size: 1.6rem;
 }
 .pokemon-image {
   width: 215px;

@@ -26,11 +26,7 @@ const pokemonItem = (pokemon) => {
               state.pokemonSpecie=jsonResponse;
               $.getJSON('http://pokeapi.co/api/v2/pokemon/'+idPokemon,(json)=>{
                 state.pokemonSelected=json;
-                // const abilityUrl = state.pokemonSelected.abilities.forEach((elem)=>{
-                //   $.getJSON(elem.ability.url,(response)=>{
-                //
-                //   })
-                // });
+
                 state.pokemonSelected.arrTypes=[];
                 state.pokemonSelected.types.forEach((elem)=>{
                   $.ajax({
@@ -63,7 +59,7 @@ const renderModal=(modal)=>{
   let nameType=[], damages=[];
   state.pokemonSelected.arrTypes.forEach((elem)=>{
     nameType.push(filterLanguage(elem.names)[0].name);
-    elem.damage_relations.half_damage_to.forEach((e)=>{
+    elem.damage_relations.double_damage_from.forEach((e)=>{
       if(damages.indexOf(e.name)==-1){
         damages.push(e.name);
       }
