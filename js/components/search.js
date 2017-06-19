@@ -3,15 +3,14 @@ const pokemonItem = (pokemon) => {
     const idPokemonImg =('000'+pokemon.entry_number).slice(-3);
     const urlPokemon = pokemon.pokemon_species.url;
     const idPokemon = pokemon.entry_number+'/';
-    const divPokemon = $('<div class="pokemonContainer"></div>');
-    const figurePokemon = $('<figure class="pokemon-container"></figure>');
+    const divPokemon = $('<div class="pokemon-container"></div>');
+    const figurePokemon = $('<figure class="pokemon-image"></figure>');
     const imgPokemon = $(`<img src="http://assets.pokemon.com/assets/cms2/img/pokedex/detail/${idPokemonImg}.png" alt="">`);
     const divBase = $ ('<div class="base"></div>');
     const pokeball = $('<img class="icon" src="assets/icon/pokeball_gray.png" alt="pokeball">');
     const heartIcon = $('<img class="icon" src="assets/icon/valentines-heart.png" alt="heart icon">');
     const dataIcon = $('<img class="icon" src="assets/icon/data.png" alt="data icon">');
     const namePokemon = $(`<div class="pokes">${pokemon.pokemon_species.name}</div>`);
-
     figurePokemon.append(imgPokemon);
     divBase.append(pokeball);
     divBase.append(heartIcon);
@@ -85,21 +84,25 @@ const renderModal=(modal)=>{
   modal.show();
 };
 const PokemonSearch = ()=>{
+    const section = $('<section class="search-pokemon"></section>')
     const formSearch = $('<form class="form-control"></form>');
-    const divSearch = $('<div></div>');
-    const input = $('<input type="search">')
+    const divSearch = $('<div class="search"></div>');
+    const input = $('<input type="search">');
+    const spanAZ = $('<span class="a-z">A-Z</span>');
     const iconSearch =$('<a class="fa fa-search" href="#" aria-hidden="true"></a>');
     const grid = $('<div class="grid-pokemon flex-container"></div>');
 
     divSearch.append(input);
+    divSearch.append(spanAZ);
     divSearch.append(iconSearch);
     formSearch.append(divSearch);
     formSearch.append(grid);
+    section.append(formSearch);
 
     input.on('keyup',_=>{
         const inputValue = input.val();
         reRender(grid,inputValue);
     });
     reRender(grid,"");
-    return formSearch;
+    return section;
 }

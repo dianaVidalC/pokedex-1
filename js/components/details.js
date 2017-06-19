@@ -6,19 +6,19 @@ const PokemonDetails = (pokemon)=>{
     const namePokemon = $(`<h2>${pokemon.name}</h2>`);
     const closeModal = $('<a href="#" class="close-modal">&times;</a>');
     const divData = $('<div class="data flex-container"></div>');
-    const divPokemon = $(`<div class="poke-left">${state.pokemonComponent}</div>`);
-    const divDetails = $('<div class="poke-right"></div>');
+    const divPokemon = $(`<div class="poke-image">${state.pokemonComponent}</div>`);
+    const divDetails = $('<div class="poke-details"></div>');
     const description = $(`<p>${pokemon.description}</p>`)
     const features = $('<div class ="features flex-container"></div>');
-    const height = $(`<div><h5>Altura:</h5><p>${pokemon.height}</p></div>`);
-    const weight = $(`<div><h5>Peso:</h5><p>${pokemon.weight}</p></div>`);
+    const height = $(`<div><h5>Altura:</h5><p>${pokemon.height/10} m</p></div>`);
+    const weight = $(`<div><h5>Peso:</h5><p>${pokemon.weight/10} kg</p></div>`);
     const genero = $(`<div><h5>Sexo:</h5><p>s</p></div>`);
     const category = $(`<div><h5>Categoria:</h5><p>${pokemon.category}</p></div>`);
     pokemon.abilities.forEach((e)=>{ability += `<p>${e}</p>`;});
     const divAbility = $(`<div><h5>Habilidad:</h5>${ability}</div>`);
-    pokemon.type.forEach((e)=>{types += `<span>${e}</span>`; });
+    pokemon.type.forEach((e)=>{types += `<span class="${e}">${e}</span>`; });
     const type = $(`<div class ="type"><h4>Tipo:</h4>${types}</div>`);
-    pokemon.weakness.forEach((e)=>{damages += `<span>${e}</span>`;});
+    pokemon.weakness.forEach((e)=>{damages += `<span class="${e}">${e}</span>`;});
     const weakness = $(`<div class ="weakness"><h4>Debilidad:</h4>${damages}</div>`);
 
     modalContent.append(namePokemon);
