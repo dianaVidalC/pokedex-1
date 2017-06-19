@@ -65,7 +65,7 @@ const renderModal=(modal)=>{
       }
     });
   })
-  console.log(damages);
+
   const objPokemonDetails = {
      name: filterLanguage(state.pokemonSpecie.names)[0].name,
      description: filterLanguage(state.pokemonSpecie.flavor_text_entries)[0].flavor_text,

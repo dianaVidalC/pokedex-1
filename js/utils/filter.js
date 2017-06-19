@@ -10,4 +10,4 @@ function filterByPokemon(pokemons,query) {
 function filterLanguage(array){
   return array.filter((e,i)=>e.language.name=='es');  
 }
-//array.findIndex(x=>x.language.name=='es')
+
