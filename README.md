@@ -8,6 +8,7 @@ La aplicacion se trabajó con el modelo de componentes de manera asincrona, los 
 - PokemonDetails
 
 Para cargar la lista de todos los pokemon se utilizó el endpoint: http://pokeapi.co/api/v2/pokedex/1/
+
 Para cargar los detalles de pokemon se consideró los siguientes endpoints:
  - Nombre, Descripcion, Categoría: http://pokeapi.co/api/v2/pokemon-species/{id-pokemon}
  - Altura, Peso, Habilidades, Tipos, Debilidades: http://pokeapi.co/api/v2/pokemon/{id-pokemon}
